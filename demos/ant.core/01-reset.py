@@ -20,8 +20,8 @@ antnode = node.Node(stick)
 # send a system reset command to the ANT stick (blocks).
 try:
     antnode.start()
-except driver.DriverError, e:
-    print e
+except driver.DriverError as e:
+    print(e)
     sys.exit()
 
 # At any point in our node's life, we could manually call reset() to re-

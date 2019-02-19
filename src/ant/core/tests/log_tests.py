@@ -56,28 +56,28 @@ class LogReaderTest(unittest.TestCase):
         t4 = self.log.read()
         t5 = self.log.read()
 
-        self.assertEquals(self.log.read(), None)
+        self.assertEqual(self.log.read(), None)
 
-        self.assertEquals(t1[0], EVENT_OPEN)
+        self.assertEqual(t1[0], EVENT_OPEN)
         self.assertTrue(isinstance(t1[1], int))
-        self.assertEquals(len(t1), 2)
+        self.assertEqual(len(t1), 2)
 
-        self.assertEquals(t2[0], EVENT_READ)
+        self.assertEqual(t2[0], EVENT_READ)
         self.assertTrue(isinstance(t1[1], int))
-        self.assertEquals(len(t2), 3)
-        self.assertEquals(t2[2], '\x01')
+        self.assertEqual(len(t2), 3)
+        self.assertEqual(t2[2], '\x01')
 
-        self.assertEquals(t3[0], EVENT_WRITE)
+        self.assertEqual(t3[0], EVENT_WRITE)
         self.assertTrue(isinstance(t1[1], int))
-        self.assertEquals(len(t3), 3)
-        self.assertEquals(t3[2], '\x00')
+        self.assertEqual(len(t3), 3)
+        self.assertEqual(t3[2], '\x00')
 
-        self.assertEquals(t4[0], EVENT_READ)
-        self.assertEquals(t4[2], 'TEST')
+        self.assertEqual(t4[0], EVENT_READ)
+        self.assertEqual(t4[2], 'TEST')
 
-        self.assertEquals(t5[0], EVENT_CLOSE)
+        self.assertEqual(t5[0], EVENT_CLOSE)
         self.assertTrue(isinstance(t1[1], int))
-        self.assertEquals(len(t5), 2)
+        self.assertEqual(len(t5), 2)
 
 
 class LogWriterTest(unittest.TestCase):

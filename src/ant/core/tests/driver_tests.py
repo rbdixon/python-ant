@@ -77,7 +77,7 @@ class DriverTest(unittest.TestCase):
         self.assertRaises(DriverError, self.driver.write, '\xFF')
         self.driver.open()
         self.assertRaises(DriverError, self.driver.write, '')
-        self.assertEquals(self.driver.write('\xFF' * 10), 10)
+        self.assertEqual(self.driver.write('\xFF' * 10), 10)
         self.driver.close()
 
 

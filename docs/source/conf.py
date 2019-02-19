@@ -44,8 +44,8 @@ source_encoding = 'utf-8-sig'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ant'
-copyright = u'2011, Martín Raúl Villalba'
+project = 'ant'
+copyright = '2011, Martín Raúl Villalba'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -185,8 +185,8 @@ htmlhelp_basename = 'ant_doc'
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-  ('index', 'ant.tex', u'Documentation for ant',
-   u'Martín Raúl Villalba', 'manual'),
+  ('index', 'ant.tex', 'Documentation for ant',
+   'Martín Raúl Villalba', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -218,6 +218,6 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'ant', u'Documentation for ant',
-     [u'Martín Raúl Villalba'], 1)
+    ('index', 'ant', 'Documentation for ant',
+     ['Martín Raúl Villalba'], 1)
 ]

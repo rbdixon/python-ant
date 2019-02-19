@@ -23,7 +23,7 @@
 #
 ##############################################################################
 
-import thread
+import _thread
 
 # USB1 driver uses a USB<->Serial bridge
 import serial
@@ -37,7 +37,7 @@ from array import *
 
 
 class Driver(object):
-    _lock = thread.allocate_lock()
+    _lock = _thread.allocate_lock()
 
     def __init__(self, device, log=None, debug=False):
         self.device = device
@@ -123,7 +123,7 @@ class Driver(object):
         if len(data) == 0:
             return
 
-        print '========== [{0}] =========='.format(title)
+        print('========== [{0}] =========='.format(title))
 
         length = 8
         line = 0
@@ -131,9 +131,9 @@ class Driver(object):
             row = data[:length]
             data = data[length:]
             hex_data = ['%02X' % ord(byte) for byte in row]
-            print '%04X' % line, ' '.join(hex_data)
+            print('%04X' % line, ' '.join(hex_data))
 
-        print ''
+        print('')
 
     def _open(self):
         raise DriverError("Not Implemented")
@@ -156,7 +156,7 @@ class USB1Driver(Driver):
     def _open(self):
         try:
             dev = serial.Serial(self.device, self.baud)
-        except serial.SerialException, e:
+        except serial.SerialException as e:
             raise DriverError(str(e))
 
         if not dev.isOpen():
@@ -175,7 +175,7 @@ class USB1Driver(Driver):
         try:
             count = self._serial.write(data)
             self._serial.flush()
-        except serial.SerialTimeoutException, e:
+        except serial.SerialTimeoutException as e:
             raise DriverError(str(e))
 
         return count

@@ -31,14 +31,15 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+
 setup(
     name='ant',
     version='develop',
     url='http://www.github.com/mvillalba/python-ant',
     license='MIT',
-    description='Python implementation of the ANT, ANT+, and ANT-FS ' \
-                'protocols (http://www.thisisant.com/).',
-    author=u'Mart\u00EDn Ra\u00FAl Villalba',
+    description='Python implementation of the ANT, ANT+, and ANT-FS '
+    'protocols (http://www.thisisant.com/).',
+    author='Mart\u00EDn Ra\u00FAl Villalba',
     author_email='martin@martinvillalba.com',
     long_description=read('README.md'),
     classifiers=[
@@ -46,19 +47,13 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Topic :: Communications",
         "Topic :: Communications :: File Sharing",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    install_requires=[
-        'distribute',
-        'pyserial',
-        'pyusb',
-        'msgpack-python'
-    ],
+    install_requires=['pyserial', 'pyusb', 'msgpack-python'],
 )
