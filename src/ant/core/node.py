@@ -128,8 +128,10 @@ class Channel(event.EventCallback):
 
     def process(self, msg):
         self.cb_lock.acquire()
-        if isinstance(msg, message.ChannelMessage) and \
-        msg.getChannelNumber() == self.number:
+        if (
+            isinstance(msg, message.ChannelMessage)
+            and msg.getChannelNumber() == self.number
+        ):
             for callback in self.cb:
                 try:
                     callback.process(msg)
@@ -195,14 +197,14 @@ class Node(event.EventCallback):
         for i in range(0, caps.getMaxChannels()):
             self.channels.append(Channel(self))
             self.channels[i].number = i
-        self.options = (caps.getStdOptions(),
-                        caps.getAdvOptions(),
-                        caps.getAdvOptions2(),)
+        self.options = (
+            caps.getStdOptions(),
+            caps.getAdvOptions(),
+            caps.getAdvOptions2(),
+        )
 
     def getCapabilities(self):
-        return (len(self.channels),
-                len(self.networks),
-                self.options,)
+        return (len(self.channels), len(self.networks), self.options)
 
     def setNetworkKey(self, number, key=None):
         if key:

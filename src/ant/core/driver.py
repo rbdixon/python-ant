@@ -27,6 +27,7 @@ import _thread
 
 # USB1 driver uses a USB<->Serial bridge
 import serial
+
 # USB2 driver uses direct USB connection. Requires PyUSB
 import usb.core
 import usb.util
@@ -183,34 +184,29 @@ class USB1Driver(Driver):
 
 class USB2Driver(Driver):
     def _open(self):
-        # Most of this is straight from the PyUSB example documentation		
-        dev = usb.core.find(idVendor=0x0fcf, idProduct=0x1008)
+        # Most of this is straight from the PyUSB example documentation
+        dev = usb.core.find(idVendor=0x0FCF, idProduct=0x1008)
 
         if dev is None:
             raise DriverError('Could not open device (not found)')
         dev.set_configuration()
         cfg = dev.get_active_configuration()
-        interface_number = cfg[(0,0)].bInterfaceNumber
+        interface_number = cfg[(0, 0)].bInterfaceNumber
         alternate_setting = usb.control.get_interface(dev, interface_number)
         intf = usb.util.find_descriptor(
-            cfg, bInterfaceNumber = interface_number,
-            AlternateSetting = alternate_setting
+            cfg, bInterfaceNumber=interface_number, AlternateSetting=alternate_setting
         )
         usb.util.claim_interface(dev, interface_number)
         ep_out = usb.util.find_descriptor(
             intf,
-            custom_match = \
-            lambda e: \
-                usb.util.endpoint_direction(e.bEndpointAddress) == \
-                usb.util.ENDPOINT_OUT
+            custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress)
+            == usb.util.ENDPOINT_OUT,
         )
         assert ep_out is not None
         ep_in = usb.util.find_descriptor(
             intf,
-            custom_match = \
-            lambda e: \
-                usb.util.endpoint_direction(e.bEndpointAddress) == \
-                usb.util.ENDPOINT_IN
+            custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress)
+            == usb.util.ENDPOINT_IN,
         )
         assert ep_in is not None
         self._ep_out = ep_out

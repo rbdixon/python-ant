@@ -46,15 +46,15 @@ def ProcessBuffer(buffer_):
         hf = Message()
         try:
             msg = hf.getHandler(buffer_)
-            buffer_ = buffer_[len(msg.getPayload()) + 4:]
+            buffer_ = buffer_[len(msg.getPayload()) + 4 :]
             messages.append(msg)
         except MessageError as e:
             if e.internal == "CHECKSUM":
-                buffer_ = buffer_[ord(buffer_[1]) + 4:]
+                buffer_ = buffer_[ord(buffer_[1]) + 4 :]
             else:
                 break
 
-    return (buffer_, messages,)
+    return (buffer_, messages)
 
 
 def EventPump(evm):

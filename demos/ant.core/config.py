@@ -11,7 +11,7 @@ SERIAL = '/dev/ttyUSB0'
 DEBUG = True
 
 # Set to None to disable logging
-#LOG = None
+# LOG = None
 LOG = log.LogWriter()
 
 # ========== DO NOT CHANGE ANYTHING BELOW THIS LINE ==========

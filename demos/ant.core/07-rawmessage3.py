@@ -22,6 +22,7 @@ class MyCallback(event.EventCallback):
     def process(self, msg):
         print(msg)
 
+
 # Initialize driver
 stick = driver.USB1Driver(SERIAL, log=LOG, debug=DEBUG)
 stick.open()

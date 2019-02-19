@@ -23,6 +23,7 @@ class HRMListener(event.EventCallback):
         if isinstance(msg, message.ChannelBroadcastDataMessage):
             print('Heart Rate:', ord(msg.payload[-1]))
 
+
 # Initialize
 stick = driver.USB1Driver(SERIAL, log=LOG, debug=DEBUG)
 antnode = node.Node(stick)

@@ -24,8 +24,9 @@ class MyCallback(event.EventCallback):
             print('Beat Count:', ord(msg.getPayload()[7]))
             print('Heart Rate:', ord(msg.getPayload()[8]))
 
+
 # Initialize driver
-stick = driver.USB1Driver(SERIAL, log=LOG) # No debug, too much data
+stick = driver.USB1Driver(SERIAL, log=LOG)  # No debug, too much data
 stick.open()
 
 # Initialize event machine

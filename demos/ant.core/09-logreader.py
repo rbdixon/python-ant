@@ -17,7 +17,7 @@ if len(sys.argv) != 2:
 lr = log.LogReader(sys.argv[1])
 
 event = lr.read()
-while (event != None):
+while event != None:
     if event[0] == log.EVENT_OPEN:
         title = 'EVENT_OPEN'
     elif event[0] == log.EVENT_CLOSE:

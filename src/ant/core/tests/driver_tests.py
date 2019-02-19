@@ -62,7 +62,7 @@ class DriverTest(unittest.TestCase):
         self.driver.close()
 
     def test_close(self):
-        pass    # Nothing to test for
+        pass  # Nothing to test for
 
     def test_read(self):
         self.assertFalse(self.driver.isOpen())

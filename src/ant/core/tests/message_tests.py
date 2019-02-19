@@ -33,8 +33,7 @@ class MessageTest(unittest.TestCase):
         self.message = Message()
 
     def test_get_setPayload(self):
-        self.assertRaises(MessageError, self.message.setPayload,
-                          '\xFF' * 15)
+        self.assertRaises(MessageError, self.message.setPayload, '\xFF' * 15)
         self.message.setPayload('\x11' * 5)
         self.assertEqual(self.message.getPayload(), '\x11' * 5)
 
@@ -47,8 +46,7 @@ class MessageTest(unittest.TestCase):
     def test_getChecksum(self):
         self.message = Message(type_=MESSAGE_SYSTEM_RESET, payload='\x00')
         self.assertEqual(self.message.getChecksum(), 0xEF)
-        self.message = Message(type_=MESSAGE_CHANNEL_ASSIGN,
-                               payload='\x00' * 3)
+        self.message = Message(type_=MESSAGE_CHANNEL_ASSIGN, payload='\x00' * 3)
         self.assertEqual(self.message.getChecksum(), 0xE5)
 
     def test_getSize(self):
@@ -56,20 +54,20 @@ class MessageTest(unittest.TestCase):
         self.assertEqual(self.message.getSize(), 11)
 
     def test_encode(self):
-        self.message = Message(type_=MESSAGE_CHANNEL_ASSIGN,
-                               payload='\x00' * 3)
-        self.assertEqual(self.message.encode(),
-                         '\xA4\x03\x42\x00\x00\x00\xE5')
+        self.message = Message(type_=MESSAGE_CHANNEL_ASSIGN, payload='\x00' * 3)
+        self.assertEqual(self.message.encode(), '\xA4\x03\x42\x00\x00\x00\xE5')
 
     def test_decode(self):
-        self.assertRaises(MessageError, self.message.decode,
-                          '\xA5\x03\x42\x00\x00\x00\xE5')
-        self.assertRaises(MessageError, self.message.decode,
-                          '\xA4\x14\x42' + ('\x00' * 20) + '\xE5')
-        self.assertRaises(MessageError, self.message.decode,
-                          '\xA4\x03\x42\x01\x02\xF3\xE5')
-        self.assertEqual(self.message.decode('\xA4\x03\x42\x00\x00\x00\xE5'),
-                         7)
+        self.assertRaises(
+            MessageError, self.message.decode, '\xA5\x03\x42\x00\x00\x00\xE5'
+        )
+        self.assertRaises(
+            MessageError, self.message.decode, '\xA4\x14\x42' + ('\x00' * 20) + '\xE5'
+        )
+        self.assertRaises(
+            MessageError, self.message.decode, '\xA4\x03\x42\x01\x02\xF3\xE5'
+        )
+        self.assertEqual(self.message.decode('\xA4\x03\x42\x00\x00\x00\xE5'), 7)
         self.assertEqual(self.message.getType(), MESSAGE_CHANNEL_ASSIGN)
         self.assertEqual(self.message.getPayload(), '\x00' * 3)
         self.assertEqual(self.message.getChecksum(), 0xE5)
@@ -77,12 +75,13 @@ class MessageTest(unittest.TestCase):
     def test_getHandler(self):
         handler = self.message.getHandler('\xA4\x03\x42\x00\x00\x00\xE5')
         self.assertTrue(isinstance(handler, ChannelAssignMessage))
-        self.assertRaises(MessageError, self.message.getHandler,
-                          '\xA4\x03\xFF\x00\x00\x00\xE5')
-        self.assertRaises(MessageError, self.message.getHandler,
-                          '\xA4\x03\x42')
-        self.assertRaises(MessageError, self.message.getHandler,
-                          '\xA4\x05\x42\x00\x00\x00\x00')
+        self.assertRaises(
+            MessageError, self.message.getHandler, '\xA4\x03\xFF\x00\x00\x00\xE5'
+        )
+        self.assertRaises(MessageError, self.message.getHandler, '\xA4\x03\x42')
+        self.assertRaises(
+            MessageError, self.message.getHandler, '\xA4\x05\x42\x00\x00\x00\x00'
+        )
 
 
 class ChannelMessageTest(unittest.TestCase):
@@ -214,8 +213,9 @@ class NetworkKeyMessageTest(unittest.TestCase):
     def test_payload(self):
         self.message.setNumber(0x01)
         self.message.setKey('\x02\x03\x04\x05\x06\x07\x08\x09')
-        self.assertEqual(self.message.getPayload(),
-                          '\x01\x02\x03\x04\x05\x06\x07\x08\x09')
+        self.assertEqual(
+            self.message.getPayload(), '\x01\x02\x03\x04\x05\x06\x07\x08\x09'
+        )
 
 
 class TXPowerMessageTest(unittest.TestCase):
@@ -373,8 +373,7 @@ class SerialNumberMessageTest(unittest.TestCase):
     def test_get_setSerialNumber(self):
         self.message.setSerialNumber('\xFA\xFB\xFC\xFD')
         self.assertEqual(self.message.getSerialNumber(), '\xFA\xFB\xFC\xFD')
-        self.assertRaises(MessageError, self.message.setSerialNumber,
-                          '\xFF' * 8)
+        self.assertRaises(MessageError, self.message.setSerialNumber, '\xFF' * 8)
 
     def test_payload(self):
         self.message.setSerialNumber('\x01\x02\x03\x04')
